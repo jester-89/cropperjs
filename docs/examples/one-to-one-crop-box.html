@@ -30,6 +30,7 @@
     <h3>Result</h3>
     <p>
       <button type="button" id="button">Crop</button>
+      <button type="button2" id="button2">Highlight</button>
     </p>
     <div id="result"></div>
   </div>
@@ -40,15 +41,17 @@
       var data = document.querySelector('#data');
       var cropBoxData = document.querySelector('#cropBoxData');
       var button = document.getElementById('button');
+      var button2 = document.getElementById('button2');
       var result = document.getElementById('result');
+      const data5 = {"x":363,"y":130,"width":528,"height":333,"rotate":0,"scaleX":1,"scaleY":1}
       var cropper = new Cropper(image, {
         ready: function (event) {
           // Zoom the image to its natural size
-          cropper.zoomTo(1);
+          //cropper.zoomTo(1);
         },
 
         crop: function (event) {
-          data.textContent = JSON.stringify(cropper.getData());
+          data.textContent = JSON.stringify(cropper.getData(true));
           cropBoxData.textContent = JSON.stringify(cropper.getCropBoxData());
         },
 
@@ -64,6 +67,9 @@
         result.innerHTML = '';
         result.appendChild(cropper.getCroppedCanvas());
       };
+      button2.onclick = function () {
+        cropper.setData(data5);
+      }
     });
   </script>
 </body>
