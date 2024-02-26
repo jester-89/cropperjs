@@ -45,6 +45,16 @@
       var result = document.getElementById('result');
       const data5 = {"x":363,"y":130,"width":528,"height":333,"rotate":0,"scaleX":1,"scaleY":1}
       var cropper = new Cropper(image, {
+        highlight: true,
+        viewMode: 3,
+        dragMode: 'move',
+        autoCropArea: 1,
+        restore: false,
+        modal: false,
+        guides: false,
+        cropBoxMovable: true,
+        cropBoxResizable: true,
+        toggleDragModeOnDblclick: true,
         ready: function (event) {
           // Zoom the image to its natural size
           //cropper.zoomTo(1);
@@ -64,11 +74,16 @@
       });
 
       button.onclick = function () {
+        cropper.enable();
         result.innerHTML = '';
         result.appendChild(cropper.getCroppedCanvas());
+        console.log("crop data: " + JSON.stringify(cropper.getData(true)))
       };
       button2.onclick = function () {
         cropper.setData(data5);
+        cropper.disable();
+        result.innerHTML = '';
+        result.appendChild(cropper.getCroppedCanvas());
       }
     });
   </script>
